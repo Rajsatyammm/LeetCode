@@ -38,6 +38,7 @@ The number of nodes in the tree is in the range [0, 5000].
 -1000 <= Node.val <= 1000
 -1000 <= targetSum <= 1000
 */
+Approach 1 : 
 
 class Solution {
     private boolean hasPath(TreeNode root, int tar, int curr) {
@@ -56,5 +57,25 @@ class Solution {
     }
     public boolean hasPathSum(TreeNode root, int targetSum) {
         return hasPath(root, targetSum, 0);
+    }
+}
+
+
+Approach 2 : 
+
+class Solution {
+    private boolean pathSum(TreeNode root, int tar) {
+        if(root == null) {
+            return false;
+        }
+        if(root.left == null && root.right == null) {
+            if(root.val == tar) {
+                return true;
+            }
+        }
+        return pathSum(root.left, (tar - root.val)) || pathSum(root.right, (tar - root.val));
+    }
+    public boolean hasPathSum(TreeNode root, int targetSum) {
+        return pathSum(root, targetSum);
     }
 }
