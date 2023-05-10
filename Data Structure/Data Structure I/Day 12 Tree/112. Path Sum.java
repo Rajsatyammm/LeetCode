@@ -16,6 +16,6 @@ class Solution {
         return pathSum(root.left, tar, curr) || pathSum(root.right, tar, curr);
     }
     public boolean hasPathSum(TreeNode root, int targetSum) {
-        return hasPath(root, targetSum, 0);
+        return pathSum(root, targetSum, 0);
     }
 }
