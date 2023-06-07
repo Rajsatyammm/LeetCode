@@ -42,7 +42,7 @@ class Solution
             res[i] = res[i] == 0 ? i : res[i];
             
             for(int j=2*i; j<=n; j+=i) {
-                if(res[j] == 0 && j % i == 0) {
+                if(res[j] == 0) {
                     res[j] = i;
                 }
             }
