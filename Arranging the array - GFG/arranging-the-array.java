@@ -39,47 +39,65 @@ class GFG {
 
 //User function Template for Java
 
+// Approach 1 : 
 class Solution {
-    static class Info implements Comparable<Info> {
-        int data;
-        String val;
-        int no;
-        
-        Info(int d, String s, int n) {
-            data = d;
-            val = s;
-            no = n;
-        }
-        
-        public int compareTo(Info i) {
-            if(this.val.equals(i.val)) {
-                return this.no - i.no;
-            }
-            else {
-                return this.val.compareTo(i.val);
-            }
-        }
-    }
-    
-    public void Rearrange(int a[], int n)
-    {
-        // Your code goes here
-        int negIdx = 0;
-        int posIdx = 0;
-        PriorityQueue<Info> pq = new PriorityQueue<>();
+    public void Rearrange(int a[], int n) {
+        ArrayList<Integer> al = new ArrayList<>();
         for(int i=0; i<n; i++) {
-            int value = a[i];
-            if(value < 0) {
-                negIdx++;
-                pq.add(new Info(value, "N", negIdx));
-            }
-            else {
-                posIdx++;
-                pq.add(new Info(value, "P", posIdx));
-            }
+            if(a[i] < 0) al.add(a[i]);
         }
         for(int i=0; i<n; i++) {
-            a[i] = pq.remove().data;
+            if(a[i] >= 0) al.add(a[i]);
+        }
+        
+        for(int i=0; i<n; i++) {
+            a[i] = al.get(i);
         }
     }
 }
+
+// Approach 2 : 
+// class Solution {
+//     static class Info implements Comparable<Info> {
+//         int data;
+//         String val;
+//         int no;
+        
+//         Info(int d, String s, int n) {
+//             data = d;
+//             val = s;
+//             no = n;
+//         }
+        
+//         public int compareTo(Info i) {
+//             if(this.val.equals(i.val)) {
+//                 return this.no - i.no;
+//             }
+//             else {
+//                 return this.val.compareTo(i.val);
+//             }
+//         }
+//     }
+    
+//     public void Rearrange(int a[], int n)
+//     {
+//         // Your code goes here
+//         int negIdx = 0;
+//         int posIdx = 0;
+//         PriorityQueue<Info> pq = new PriorityQueue<>();
+//         for(int i=0; i<n; i++) {
+//             int value = a[i];
+//             if(value < 0) {
+//                 negIdx++;
+//                 pq.add(new Info(value, "N", negIdx));
+//             }
+//             else {
+//                 posIdx++;
+//                 pq.add(new Info(value, "P", posIdx));
+//             }
+//         }
+//         for(int i=0; i<n; i++) {
+//             a[i] = pq.remove().data;
+//         }
+//     }
+// }
