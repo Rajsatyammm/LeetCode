@@ -49,12 +49,24 @@ class Solution {
     public static void update(int a[], int n, int updates[], int k)
     {
         // Your code goes here
-        int idx = 0;
-        while(idx != k) {
-            for(int i=updates[idx]-1; i<n; i++) 
-                a[i] += 1;
-            idx++;
+        
+        // Approach 1 : T(n) = O(n*k)
+        // int idx = 0;
+        // while(idx != k) {
+        //     for(int i=updates[idx]-1; i<n; i++) {
+        //         a[i] += 1;
+        //     }
+        //     idx++;
+        // }
+        
+        // Approach 2 :  T(n) = O(N)
+        for(int i=0; i<k; i++) {
+            int idx = updates[i] - 1;
+            a[idx] += 1;
+        }
+        
+        for(int i=1; i<n; i++) {
+            a[i] += a[i-1];
         }
     }
-    
 }
