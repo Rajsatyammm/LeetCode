@@ -33,18 +33,35 @@ class Driverclass
 
 class Solution {
     //Function to find the first non-repeating character in a string.
+    // Approach 1 :
+    // static char nonrepeatingCharacter(String S) {
+    //     //Your code here
+    //     Map<Character, Integer> map = new HashMap<>();
+    //     for(char ch : S.toCharArray()) {
+    //         map.put(ch, map.getOrDefault(ch, 0) + 1);
+    //     }
+        
+    //     for(char ch : S.toCharArray()) {
+    //         if(map.get(ch) == 1) {
+    //             return ch;
+    //         }
+    //     }
+    //     return '$';
+    // }
+    
+    // Appraoch 2 : 
     static char nonrepeatingCharacter(String S) {
-        //Your code here
-        Map<Character, Integer> map = new HashMap<>();
+        int[] a = new int[26];
         for(char ch : S.toCharArray()) {
-            map.put(ch, map.getOrDefault(ch, 0) + 1);
+            a[ch - 'a']++;
         }
         
         for(char ch : S.toCharArray()) {
-            if(map.get(ch) == 1) {
+            if(a[ch - 'a'] == 1) {
                 return ch;
             }
         }
+        
         return '$';
     }
 }
