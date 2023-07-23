@@ -80,23 +80,51 @@ class Node
 */
 class Solution {
     //Function to sort a linked list of 0s, 1s and 2s.
+    
+    // Approach 1 :
+    // static Node segregate(Node head) {
+    //     // add your code here
+    //     Node curr = head;
+    //     List<Integer> al = new ArrayList<>();
+    //     while(curr != null) {
+    //         al.add(curr.data);
+    //         curr = curr.next;
+    //     }
+        
+    //     Collections.sort(al);
+    //     Node dummy = new Node(0);
+    //     curr = dummy;
+    //     for(int i : al) {
+    //         curr.next = new Node(i);
+    //         curr = curr.next;
+    //     }
+    //     curr.next = null;
+    //     return dummy.next;
+    // }
+    
+    // Approach 2 :
     static Node segregate(Node head) {
-        // add your code here
+        
+        Map<Integer, Integer> map = new HashMap<>();
         Node curr = head;
-        List<Integer> al = new ArrayList<>();
+    
+        Node dummy = new Node(0);
         while(curr != null) {
-            al.add(curr.data);
+            map.put(curr.data, map.getOrDefault(curr.data, 0) + 1);
             curr = curr.next;
         }
         
-        Collections.sort(al);
-        Node dummy = new Node(0);
         curr = dummy;
-        for(int i : al) {
-            curr.next = new Node(i);
-            curr = curr.next;
+        for(int i=0; i<=2; i++) {
+            int freq = map.getOrDefault(i, 0);
+            
+            while(freq != 0) {
+                Node newNode = new Node(i);
+                curr.next = newNode;
+                curr = curr.next;
+                freq--;
+            }
         }
-        curr.next = null;
         return dummy.next;
     }
 }
