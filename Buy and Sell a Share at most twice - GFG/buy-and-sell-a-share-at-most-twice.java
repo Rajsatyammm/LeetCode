@@ -65,35 +65,66 @@ class Solution {
         return f(price);
     }
     
-    static int f(int i, int maxTr, int[] price) {
-        if(i == price.length || maxTr == 0) return 0;
-        
-        if(maxTr % 2 == 0) { //buy case
-            return Math.max(-price[i] + f(i+1, maxTr-1, price), f(i+1, maxTr, price));
-        }
-        else { // sell case
-            return Math.max(price[i] + f(i+1, maxTr-1, price), f(i+1, maxTr, price));
-        }
-    }
     
+    // Space Optimization
     static int f(int[] price) {
         int n = price.length;
-        int[][] dp = new int[n+1][5];
-        for(int i=0; i<=n; i++) dp[i][0] = 0;
-        for(int j=0; j<5; j++) dp[0][j] = 0;
+        int[] prev = new int[5];
+        int[] curr = new int[5];
+        for(int i=0; i<=n; i++) prev[0] = 0;
+        for(int j=0; j<5; j++) prev[j] = 0;
         
         for(int i=n-1; i>=0; i--) {
             for(int maxTr=1; maxTr<5; maxTr++) {
                 if(maxTr % 2 == 0) { //buy case
-                    dp[i][maxTr] = Math.max(-price[i] + dp[i+1][maxTr-1], dp[i+1][maxTr]);
+                    curr[maxTr] = Math.max(-price[i] + prev[maxTr-1], prev[maxTr]);
                 }
                 else { // sell case
-                    dp[i][maxTr] = Math.max(price[i] + dp[i+1][maxTr-1], dp[i+1][maxTr]);
+                    curr[maxTr] = Math.max(price[i] + prev[maxTr-1], prev[maxTr]);
                 }
             }
+            prev = curr;
         }
-        return dp[0][4];
+        return prev[4];
     }
+    
+    
+    // Recursion 
+    
+    // static int f(int i, int maxTr, int[] price) {
+    //     if(i == price.length || maxTr == 0) return 0;
+        
+    //     if(maxTr % 2 == 0) { //buy case
+    //         return Math.max(-price[i] + f(i+1, maxTr-1, price), f(i+1, maxTr, price));
+    //     }
+    //     else { // sell case
+    //         return Math.max(price[i] + f(i+1, maxTr-1, price), f(i+1, maxTr, price));
+    //     }
+    // }
+    
+    
+    // Tabulation 2D DP
+    
+    // static int f(int[] price) {
+    //     int n = price.length;
+    //     int[][] dp = new int[n+1][5];
+    //     for(int i=0; i<=n; i++) dp[i][0] = 0;
+    //     for(int j=0; j<5; j++) dp[0][j] = 0;
+        
+    //     for(int i=n-1; i>=0; i--) {
+    //         for(int maxTr=1; maxTr<5; maxTr++) {
+    //             if(maxTr % 2 == 0) { //buy case
+    //                 dp[i][maxTr] = Math.max(-price[i] + dp[i+1][maxTr-1], dp[i+1][maxTr]);
+    //             }
+    //             else { // sell case
+    //                 dp[i][maxTr] = Math.max(price[i] + dp[i+1][maxTr-1], dp[i+1][maxTr]);
+    //             }
+    //         }
+    //     }
+    //     return dp[0][4];
+    // }
+    
+    // Memoisation 3D DP
     
     // static int f(int i, int buy, int max, int[] price, int[][][] dp) {
     //     if(i == price.length) return 0;
@@ -106,6 +137,9 @@ class Solution {
     //     else 
     //         return dp[i][buy][max] = Math.max(price[i] + f(i+1, 1, max-1, price, dp), f(i+1, 0, max, price, dp));
     // }
+    
+    
+    // Tabulation 3D DP
     
     // static int f(int[] price) {
     //     int n = price.length;
