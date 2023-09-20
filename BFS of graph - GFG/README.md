@@ -2,9 +2,9 @@
 ## Easy
 <div class="problems_problem_content__Xm_eO"><p><span style="font-size: 18px;">Given a directed&nbsp;graph. The task is to do Breadth First Traversal of this graph starting from 0.<br><strong>Note: </strong>One can move from node u to node v only if there's an edge from u to v. Find the BFS traversal of the graph starting from the 0th vertex,</span><span style="font-size: 18px;"> from left to right according to the input graph. Also, you should only take nodes directly or indirectly connected from Node 0 in consideration.</span></p>
 <p><br><span style="font-size: 18px;"><strong>Example 1:</strong></span></p>
-<pre><span style="font-size: 18px;"><strong>Input:</strong>
+<pre><span style="font-size: 18px;"><strong>Input:<br></strong>V = 5, E = 4<br>edges = {(0,1),(0,2),(0,3),(2,4)}<br>
 </span><img src="https://media.geeksforgeeks.org/img-practice/PROD/addEditProblem/700217/Web/Other/e0eb5630-5d6c-493a-9b1e-d16d40f10b01_1685086421.png" alt=""><span style="font-size: 18px;">
-<strong>Output:</strong> 0 1 2 3 4
+<strong>Output:</strong> <br>0 1 2 3 4
 <strong>Explanation</strong>: 
 0 is connected to 1 , 2 , 3.
 2 is connected to 4.
@@ -13,9 +13,9 @@ then 3. After this 2 to 4, thus bfs will be
 0 1 2 3 4.</span>
 </pre>
 <p><span style="font-size: 18px;"><strong>Example 2:</strong></span></p>
-<pre><span style="font-size: 18px;"><strong>Input:</strong>
+<pre><span style="font-size: 18px;"><strong>Input:<br></strong>V = 3, E = 2<br>edges = {(0,1),(0,2)}
 </span><img src="https://media.geeksforgeeks.org/img-practice/PROD/addEditProblem/700217/Web/Other/001e9e35-da68-4024-b1d3-e34944188a1e_1685086422.png" alt=""><span style="font-size: 18px;">
-<strong>Output:</strong> 0 1 2
+<strong>Output:</strong> <br>0 1 2
 <strong>Explanation</strong>:
 0 is connected to 1 , 2.
 so starting from 0, it will go to 1 then 2,
