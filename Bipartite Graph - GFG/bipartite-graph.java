@@ -36,35 +36,50 @@ class GFG
 
 
 class Solution {
-    private boolean isBipartiteUtil(int V, ArrayList<ArrayList<Integer>>adj, int[] col, int i) {
-        Queue<Integer> q = new LinkedList<>();
-        q.add(i);
-        
-        while(!q.isEmpty()) {
-            int curr = q.poll();
-            for(int j : adj.get(curr)) {
-                int nextCol = col[curr] == 1 ? 0 : 1;
-                if(col[j] == -1) {
-                    col[j] = nextCol;
-                    q.add(j);
-                }
-                else if(col[j] == col[curr]) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-    
     public boolean isBipartite(int V, ArrayList<ArrayList<Integer>>adj) {
         // Code here
         int[] col = new int[V];
         Arrays.fill(col, -1);
         for(int i=0; i<V; i++) {
             if(col[i] == -1) {
-                col[i] = 0;
-                if(!isBipartiteUtil(V, adj, col, i)) 
+                if(!dfs(i, 0, col, adj)) return false;
+            }
+        }
+        return true;
+    }
+    
+    boolean dfs(int src, int color, int[] col, ArrayList<ArrayList<Integer>>adj) {
+        col[src] = color;
+        
+        for(int ne : adj.get(src)) {
+            if(col[ne] == -1) {
+                int newCol = color == 1 ? 0 : 1;
+                if(!dfs(ne, newCol, col, adj)) return false;
+            }
+            else if(col[ne] == color) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    boolean bfs(int src, int[] col, ArrayList<ArrayList<Integer>>adj) {
+        Queue<Integer> q = new LinkedList<>();
+        col[src] = 0;
+        q.add(src);
+        
+        while(!q.isEmpty()) {
+            int curr = q.remove();
+            
+            for(int ne : adj.get(curr)) {
+                if(col[ne] == -1) {
+                    int nextCol = col[curr] == 0 ? 1 : 0;
+                    col[ne] = nextCol;
+                    q.add(ne);
+                }
+                else if(col[curr] == col[ne]) {
                     return false;
+                }
             }
         }
         return true;
