@@ -31,25 +31,22 @@ class GFG
 // } Driver Code Ends
 
 
-class Solution
-{
+class Solution {
     //Function to find the maximum money the thief can get.
     public int FindMaxSum(int arr[], int n) {
         // Your code here
-        int[] dp = new int[n+1];
+        int[] dp = new int[n];
         Arrays.fill(dp, -1);
-        return findMax(arr, n-1, dp);
-        
+        return f(0, n-1, arr, dp);
     }
     
-    private int findMax(int[] a, int n, int[] dp) {
-        if(n == 0) return a[0];
-        if(n < 0) return 0;
+    int f(int i, int n, int[] arr, int[] dp) {
+        if(i == n) return arr[n];
+        if(i > n) return 0;
+        if(dp[i] != -1) return dp[i];
+        int take = arr[i] + f(i+2, n, arr, dp);
+        int notTake = f(i+1, n, arr, dp);
         
-        if(dp[n] != -1) return dp[n];
-        int ans1 = findMax(a, n-2, dp) + a[n];
-        int ans2 = findMax(a, n-1, dp);
-        
-        return dp[n] = Math.max(ans1, ans2);
+        return dp[i] = Math.max(take, notTake);
     }
 }
