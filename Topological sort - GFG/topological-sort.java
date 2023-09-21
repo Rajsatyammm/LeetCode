@@ -59,35 +59,82 @@ class Main {
 
 
 class Solution {
-    //Function to return list containing vertices in Topological order. 
+    
     static int[] topoSort(int V, ArrayList<ArrayList<Integer>> adj) {
-        // add your code here
         boolean[] vis = new boolean[V];
-        Stack<Integer> s = new Stack<>();
-        
-        for(int i=0; i<V; i++) {
-            if(!vis[i]) {
-                dfs(i, vis, s, adj);
-            }
-        }
-        
-        int[] res = new int[V];
-        int i = 0;
-        while(!s.isEmpty()) {
-            res[i++] = s.pop();
-        }
-        return res;
+        return bfs(0, V, vis, adj);
     }
     
-    static void dfs(int src, boolean[] vis, Stack<Integer> st, ArrayList<ArrayList<Integer>> adj) {
-        vis[src] = true;
-        
-        for(int ne : adj.get(src)) {
-            if(!vis[ne]) {
-                dfs(ne, vis, st, adj);
+    static int[] bfs(int src, int V, boolean[] vis, ArrayList<ArrayList<Integer>> adj) {
+        // calculate indeg
+        Queue<Integer> q = new LinkedList<>(); 
+        int[] indeg = new int[V];
+        for(int i=0; i<V; i++) {
+            for(int ne : adj.get(i)) {
+                indeg[ne]++;
             }
         }
         
-        st.push(src);
+        for(int i=0; i<V; i++) {
+            if(indeg[i] == 0) {
+                q.add(i);
+            }
+        }
+        
+        int[] ans = new int[V];
+        int ansIdx = 0;
+        
+        while(!q.isEmpty()) {
+            int curr = q.remove();
+            ans[ansIdx++] = curr;
+            if(!vis[curr]) {
+                vis[curr] = true;
+                
+                for(int ne : adj.get(curr)) {
+                    indeg[ne]--;
+                    
+                    if(indeg[ne] == 0) {
+                        q.add(ne);
+                    }
+                }
+            }
+        }
+        return ans;
+        
     }
+    
 }
+
+// class Solution {
+//     //Function to return list containing vertices in Topological order. 
+//     static int[] topoSort(int V, ArrayList<ArrayList<Integer>> adj) {
+//         // add your code here
+//         boolean[] vis = new boolean[V];
+//         Stack<Integer> s = new Stack<>();
+        
+//         for(int i=0; i<V; i++) {
+//             if(!vis[i]) {
+//                 dfs(i, vis, s, adj);
+//             }
+//         }
+        
+//         int[] res = new int[V];
+//         int i = 0;
+//         while(!s.isEmpty()) {
+//             res[i++] = s.pop();
+//         }
+//         return res;
+//     }
+    
+//     static void dfs(int src, boolean[] vis, Stack<Integer> st, ArrayList<ArrayList<Integer>> adj) {
+//         vis[src] = true;
+        
+//         for(int ne : adj.get(src)) {
+//             if(!vis[ne]) {
+//                 dfs(ne, vis, st, adj);
+//             }
+//         }
+        
+//         st.push(src);
+//     }
+// }
