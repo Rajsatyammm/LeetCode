@@ -1,6 +1,6 @@
 # Replace O's with X's
 ## Medium
-<div class="problems_problem_content__Xm_eO"><p><span style="font-size: 18px;">Given a matrix <strong>mat</strong> of size <strong>N x M</strong> where every element is either 'O' or 'X'. Replace all 'O' with 'X' that are surrounded by 'X'. </span></p>
+<div class="problems_problem_content__Xm_eO"><p><span style="font-size: 18px;">Given a matrix <strong>mat</strong> of size <strong>N x M</strong> where every element is either 'O' or 'X'. Replace all 'O' or a group of 'O' with 'X' that are surrounded by 'X'. </span></p>
 <p><span style="font-size: 18px;">A 'O' (or a set of 'O') is considered to be surrounded by 'X' if there are 'X' at locations just below, just above, just left and just right of it.</span></p>
 <p><strong><span style="font-size: 18px;">Example 1:</span></strong></p>
 <pre><span style="font-size: 18px;"><strong>Input:</strong> <br>n = 5, m = 4
