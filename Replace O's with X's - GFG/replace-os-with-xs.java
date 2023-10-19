@@ -40,8 +40,8 @@ class GFG{
 //User function Template for Java
 
 class Solution{
-    static char[][] fill(int n, int m, char a[][])
-    {
+    
+    static char[][] fill(int n, int m, char a[][]) {
         // code here
          for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
@@ -64,7 +64,8 @@ class Solution{
         return a;
     
     }
-     public static void dfs(int i, int j, char a[][]) {
+    
+    public static void dfs(int i, int j, char a[][]) {
         if (i < 0 || i >= a.length || j < 0 || j >= a[0].length || a[i][j] != 'O') {
             return;
         }
@@ -72,10 +73,24 @@ class Solution{
         a[i][j] = 'V';
 
         // Visit neighboring cells.
-        dfs(i + 1, j, a);
-        dfs(i - 1, j, a);
-        dfs(i, j + 1, a);
-        dfs(i, j - 1, a);
+        // dfs(i + 1, j, a);
+        // dfs(i - 1, j, a);
+        // dfs(i, j + 1, a);
+        // dfs(i, j - 1, a);
+        
+                // OR
+                
+        int[] delrow = {1, 0, -1, 0};
+        int[] delcol = {0, -1, 0, 1};
+        
+        for(int k=0; k<4; k++) {
+            int nr = i + delrow[k];
+            int nc = j + delcol[k];
+            
+            if(nr >= 0 && nr < a.length && nc >= 0 && nc < a[0].length) {
+                dfs(nr, nc, a);
+            }
+        }
     }
 
 }
